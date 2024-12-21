@@ -3,31 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ansh's Portfolio</title>
-    <link rel="icon" href="myicon.ico" type="image/x-icon" />
+    <title>Ansh Ranjan's Portfolio</title>
 
+    <link rel="icon" href="myicon.ico" type="image/x-icon" />
     <link
       rel="preload"
       href="https://embed.figma.com/proto/JYz2cF0llEikYb2BWdjOpb/Portfolio?page-id=0%3A1&node-id=5-309&node-type=frame&viewport=-560%2C-3541%2C0.74&scaling=scale-down-width&content-scaling=fixed&starting-point-node-id=5%3A309&embed-host=share&hide-ui=1&hide-hints=true"
       as="document"
       fetchpriority="high"
-    />
-
-    <link rel="preconnect" href="https://cdn.figma.com" crossorigin />
-    <link rel="preconnect" href="https://embed.figma.com" crossorigin />
-    <link rel="dns-prefetch" href="https://cdn.figma.com" />
-    <link rel="dns-prefetch" href="https://embed.figma.com" />
-
-    <link
-      rel="prefetch"
-      href="https://cdn.figma.com/assets/figma-image-server/"
-      as="fetch"
       crossorigin
     />
     <link
       rel="prefetch"
       href="https://embed.figma.com/proto/JYz2cF0llEikYb2BWdjOpb/Portfolio?page-id=0%3A1&node-id=5-309&node-type=frame&viewport=-560%2C-3541%2C0.74&scaling=scale-down-width&content-scaling=fixed&starting-point-node-id=5%3A309&embed-host=share&hide-ui=1&hide-hints=true"
       as="document"
+      fetchpriority="high"
+      crossorigin
+    />
+    <link rel="preconnect" href="https://cdn.figma.com" crossorigin />
+    <link rel="preconnect" href="https://embed.figma.com" crossorigin />
+    <link rel="dns-prefetch" href="https://cdn.figma.com" crossorigin />
+    <link rel="dns-prefetch" href="https://embed.figma.com" crossorigin />
+    <link
+      rel="prefetch"
+      href="https://cdn.figma.com/assets/figma-image-server/"
+      as="fetch"
       crossorigin
     />
 
@@ -38,29 +38,59 @@
         padding: 0;
         height: 100%;
         overflow: hidden;
-        background-color: #f9f9f9;
+        background-color: #000000;
+        font-family: Arial, sans-serif;
       }
+
+      iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        visibility: visible;
+        opacity: 1;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        transition: opacity 1s ease;
+      }
+
       .loader {
         position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #000000;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         text-align: center;
+        opacity: 1;
+        transition: opacity 1.5s ease-out;
+        z-index: 1;
       }
-      .loader p {
-        margin: 10px 0 0;
+
+      .loader .text {
         font-size: 16px;
         font-weight: bold;
-        color: #333;
+        color: #fcfcfc;
+        animation: bounce 1.5s infinite;
+        user-select: none;
+        margin-top: 40px;
+        line-height: 1.35;
       }
+
       .spinner {
         width: 50px;
         height: 50px;
-        border: 8px solid #ccc;
-        border-top: 8px solid #000000;
+        border: 8px solid #ddd;
+        border-top: 8px solid #007aff;
         border-radius: 50%;
-        animation: spin 1s linear infinite;
+        animation: spin 1.5s linear infinite;
       }
+
       @keyframes spin {
         0% {
           transform: rotate(0deg);
@@ -69,20 +99,30 @@
           transform: rotate(360deg);
         }
       }
-      iframe {
-        width: 100%;
-        height: 100%;
-        border: none;
-        visibility: hidden;
+
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
       }
+
       .iframe-visible {
-        visibility: visible;
+        z-index: 1;
       }
     </style>
   </head>
   <body>
     <div class="loader" id="preloader" role="alert" aria-live="polite">
       <div class="spinner"></div>
+      <p class="text">
+        For the best experience, this website has been optimised for desktop
+        viewing.<br />
+        If you have a slow internet connection, images may take longer to load.
+      </p>
     </div>
 
     <iframe
@@ -90,20 +130,26 @@
       allowfullscreen
       loading="eager"
       id="hiddenIframe"
-      onload="hidePreloader()"
-      aria-label="Interactive portfolio embedded via Figma."
+      onload="setTimeout(hidePreloader, 10000)"
+      aria-label="Interactive Portfolio embedded as a Figma Prototype."
     ></iframe>
 
     <script>
       function hidePreloader() {
         const preloader = document.getElementById("preloader");
         const iframe = document.getElementById("hiddenIframe");
+
         preloader.style.opacity = "0";
         setTimeout(() => {
           preloader.style.display = "none";
-          iframe.classList.add("iframe-visible");
-        }, 500);
+          iframe.style.zIndex = 1;
+        }, 1500);
       }
+
+      document.getElementById("hiddenIframe").onerror = function () {
+        document.getElementById("preloader").innerHTML =
+          '<p class="text">Failed to load content. Please try again later.</p>';
+      };
     </script>
   </body>
 </html>
