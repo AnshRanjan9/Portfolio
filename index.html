@@ -5,15 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ansh Ranjan's Portfolio</title>
     <link rel="icon" href="myicon.ico" type="image/x-icon" />
-    <link
-      rel="preload"
-      href="https://embed.figma.com/proto/JYz2cF0llEikYb2BWdjOpb/Portfolio?page-id=0%3A1&node-id=5-309&scaling=scale-down-width&embed-host=share&hide-ui=1"
-      as="document"
-      fetchpriority="high"
-      crossorigin
-    />
     <link rel="preconnect" href="https://cdn.figma.com" crossorigin />
     <link rel="preconnect" href="https://embed.figma.com" crossorigin />
+    <meta http-equiv="X-WebGL-Force-Enabled" content="true" />
 
     <style>
       body,
@@ -23,7 +17,6 @@
         height: 100%;
         overflow: hidden;
         background-color: rgb(0, 0, 0);
-        will-change: opacity, transform;
         font-family: Arial, sans-serif;
       }
 
@@ -34,7 +27,15 @@
         position: absolute;
         top: 0;
         left: 0;
-        transition: opacity 1.5s ease;
+        transition: opacity 1.25s ease;
+        will-change: opacity, transform;
+        contain: strict;
+        backface-visibility: hidden;
+        transform: translate3d(0, 0, 0);
+        perspective: 1000px;
+        frameborder: 0;
+        scrolling: no;
+        decoding: async;
       }
 
       .loader {
@@ -50,35 +51,49 @@
         align-items: center;
         text-align: center;
         opacity: 1;
-        transition: opacity 1.5s ease-out;
+        transition: opacity 1.25s ease-out;
         z-index: 1;
+        will-change: opacity;
+        contain: content;
       }
 
       .loader .text {
         font-size: 18px;
         font-weight: bold;
         color: #fcfcfc;
-        animation: bounce 2s infinite;
         user-select: none;
-        margin-top: 50px;
+        margin-bottom: 20px;
         line-height: 1.35;
+        animation: bounce 2.5s infinite;
+        will-change: transform;
       }
 
-      .spinner {
-        width: 75px;
-        height: 75px;
-        border: 11px solid #ddd;
-        border-top: 11px solid #007aff;
-        border-radius: 50%;
-        animation: spin 2s linear infinite;
+      .progress-bar {
+        width: 45%;
+        height: 8px;
+        background-color: rgba(255, 255, 255, 0.25);
+        border-radius: 4px;
+        overflow: hidden;
+        position: relative;
+        will-change: width;
       }
 
-      @keyframes spin {
-        0% {
-          transform: rotate(0deg);
+      .progress-bar::after {
+        content: "";
+        display: block;
+        height: 100%;
+        width: 0%;
+        background-color: #007aff;
+        transition: width 10s linear;
+        animation: progressFill 10s linear forwards;
+      }
+
+      @keyframes progressFill {
+        from {
+          width: 0%;
         }
-        100% {
-          transform: rotate(360deg);
+        to {
+          width: 100%;
         }
       }
 
@@ -88,12 +103,12 @@
           transform: translateY(0px);
         }
         50% {
-          transform: translateY(-10px);
+          transform: translateY(-5px);
         }
       }
 
       .loader.fade-out {
-        animation: fadeOut 1.5s forwards;
+        animation: fadeOut 1.25s forwards;
       }
 
       @keyframes fadeOut {
@@ -106,23 +121,21 @@
   </head>
   <body>
     <div class="loader" id="preloader" role="alert" aria-live="polite">
-      <div class="spinner"></div>
       <p class="text">
         For the best experience, this website is optimized for desktop
         browsers.<br />
-        If you have a slow internet connection, images may take longer to load.
+        If you have a slow internet connection, some images may take longer to
+        load.
       </p>
+      <div class="progress-bar"></div>
     </div>
 
     <iframe
       src="https://embed.figma.com/proto/JYz2cF0llEikYb2BWdjOpb/Portfolio?page-id=0%3A1&node-id=5-309&scaling=scale-down-width&embed-host=share&hide-ui=1"
       allowfullscreen
-      will-change: transform, opacity;
-      backface-visibility: hidden;
-      transform: translate3d(0, 0, 0);
       loading="eager"
       id="hiddenIframe"
-      onload="setTimeout(hidePreloader, 10000)"
+      onload="setTimeout(hidePreloader, 9250)"
       aria-label="Interactive Portfolio embedded as a Figma Prototype."
     ></iframe>
 
@@ -130,12 +143,12 @@
       function hidePreloader() {
         const preloader = document.getElementById("preloader");
         preloader.classList.add("fade-out");
-        setTimeout(() => (preloader.style.display = "none"), 1200);
+        setTimeout(() => preloader.remove(), 1250);
       }
 
       document.getElementById("hiddenIframe").onerror = function () {
         document.getElementById("preloader").innerHTML =
-          '<p class="text">Failed to load content. Please contact me (ansh.r@nidh.ac.in) or try again later.</p>';
+          '<p class="text">Sorry we are going under maintenance. Please contact me (ansh.ranjan.design@gmail.com) for updates or try again later.</p>';
       };
     </script>
   </body>
