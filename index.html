@@ -184,12 +184,14 @@
 
         if (isPortrait) {
           loadingText.innerHTML =
-            "Please rotate your device and then reload the page. However, this website is best experienced on a desktop browser. Switch to landscape orientation on a larger screen or view the interactive PDF Version.";
+            "Please rotate your device and then reload the page. However, this portfolio is best experienced on a desktop browser. Alternatively, you can view the interactive PDF version below.";
           progressBar.style.display = "none";
-          if (iframe) iframe.remove();
+          iframe.style.display = "none";
+          document.getElementById("downloadBtn").style.display = "block";
         } else {
           progressBar.style.display = "block";
           iframe.style.display = "block";
+          document.getElementById("downloadBtn").style.display = "none";
           setTimeout(hidePreloader, 10000);
         }
       }
