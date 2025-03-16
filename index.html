@@ -20,7 +20,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="theme-color" content="#000000" />
 
-    <style>
+<style>
       body,
       html {
         margin: 0;
@@ -98,6 +98,24 @@
         animation: progressFill 9.75s linear forwards;
       }
 
+      .download-btn {
+        margin: 30px;
+        padding: 12px 24px;
+        background-color: #007aff;
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: bold;
+        text-decoration: none;
+        border-radius: 6px;
+        transition: background-color 0.2s ease, transform 0.2s ease;
+        display: inline-block;
+      }
+
+      .download-btn:hover {
+        background-color: #005bb5;
+        transform: scale(1.05);
+      }
+
       @keyframes progressFill {
         from {
           width: 0%;
@@ -132,12 +150,19 @@
   <body>
     <div class="loader" id="preloader" role="alert" aria-live="polite">
       <p class="text" id="loadingText">
-        For the best experience, please view this website on desktop
-        browsers.<br />
+        For the best experience, please view this website on a desktop
+        browser.<br />
         If your internet connection is slow, some images may take longer to
         load.
       </p>
       <div class="progress-bar" id="progressBar"></div>
+      <a
+        download="Ansh_Ranjan_Portfolio.pdf"
+        class="download-btn"
+        id="downloadBtn"
+      >
+        Download PDF Portfolio
+      </a>
     </div>
 
     <iframe
@@ -159,7 +184,7 @@
 
         if (isPortrait) {
           loadingText.innerHTML =
-            "Please rotate your device and then reload. However, this portfolio is best viewed on a desktop browser, switch to a larger screen for the best experience.";
+            "Please rotate your device and then reload the page. However, this website is best experienced on a desktop browser. Switch to landscape orientation on a larger screen or view the interactive PDF Version.";
           progressBar.style.display = "none";
           if (iframe) iframe.remove();
         } else {
@@ -179,6 +204,19 @@
         document.getElementById("preloader").innerHTML =
           '<p class="text">Sorry we are going under maintenance. Please contact me (ansh.ranjan.design@gmail.com) for updates or try again later.</p>';
       };
+
+      document
+        .getElementById("downloadBtn")
+        .addEventListener("click", function (event) {
+          event.preventDefault();
+          document.getElementById("preloader").style.display = "none";
+          document.getElementById("hiddenIframe").style.display = "none";
+
+          setTimeout(() => {
+            window.location.href =
+              "https://drive.google.com/file/d/1ed4MJa-4SaHOQqrXLconaTas83x5jH_c/view?usp=drive_link";
+          }, 100);
+        });
 
       Load();
       window.addEventListener("load", Load);
