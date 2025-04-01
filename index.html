@@ -69,23 +69,26 @@
 
       .loader .text {
         font-size: 20px;
-        font-weight: bold;
         color: #fcfcfc;
-        user-select: none;
-        margin-bottom: 20px;
+        margin: 20px;
         line-height: 1.45;
         animation: bounce 2.5s infinite;
         will-change: transform;
+        text-align: center;
+        overflow: hidden;
+        white-space: pre-line;
+        user-select: none;
       }
 
       .progress-bar {
-        width: 45%;
+        width: 42.5%;
         height: 8px;
         background-color: rgba(255, 255, 255, 0.25);
         border-radius: 4px;
         overflow: hidden;
         position: relative;
         will-change: width;
+        margin: 10px;
       }
 
       .progress-bar::after {
@@ -94,8 +97,8 @@
         height: 100%;
         width: 0%;
         background-color: #007aff;
-        transition: width 9.75s linear;
-        animation: progressFill 9.75s linear forwards;
+        transition: width 10s linear;
+        animation: progressFill 10s linear forwards;
       }
 
       .download-btn {
@@ -106,14 +109,15 @@
         font-size: 16px;
         font-weight: bold;
         text-decoration: none;
-        border-radius: 6px;
+        border-radius: 8px;
         transition: background-color 0.2s ease, transform 0.2s ease;
         display: inline-block;
+        cursor: pointer;
       }
 
       .download-btn:hover {
         background-color: #005bb5;
-        transform: scale(1.05);
+        transform: scale(1.075);
       }
 
       @keyframes progressFill {
@@ -136,7 +140,7 @@
       }
 
       .loader.fade-out {
-        animation: fadeOut 1.25s forwards;
+        animation: fadeOut 2s forwards;
       }
 
       @keyframes fadeOut {
@@ -149,20 +153,18 @@
   </head>
   <body>
     <div class="loader" id="preloader" role="alert" aria-live="polite">
-      <p class="text" id="loadingText">
-        For the best experience, please view this website on a desktop
-        browser.<br />
-        If your internet connection is slow, some images may take longer to
-        load.<br />
-        Alternatively, you can also view the interactive PDF version below.
-      </p>
+        <p class="text" id="loadingText">
+          For the best experience, please view this website on a desktop browser.
+          If your internet connection is slow, some images may take longer to load.
+          Alternatively, you can also view the interactive PDF version.
+        </p>
       <div class="progress-bar" id="progressBar"></div>
       <a
         download="Ansh_Ranjan_Portfolio.pdf"
         class="download-btn"
         id="downloadBtn"
       >
-        Download PDF Portfolio
+        View PDF Portfolio
       </a>
     </div>
 
@@ -193,14 +195,14 @@
           progressBar.style.display = "block";
           iframe.style.display = "block";
           document.getElementById("downloadBtn").style.display = "block";
-          setTimeout(hidePreloader, 10000);
+          setTimeout(hidePreloader, 10500);
         }
       }
 
       function hidePreloader() {
         const preloader = document.getElementById("preloader");
         preloader.classList.add("fade-out");
-        setTimeout(() => preloader.remove(), 1250);
+        setTimeout(() => preloader.remove(), 1750);
       }
 
       document.getElementById("hiddenIframe").onerror = function () {
