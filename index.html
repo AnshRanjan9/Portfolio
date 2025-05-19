@@ -84,8 +84,8 @@
         height: 100%;
         width: 0%;
         background-color: #007aff;
-        transition: width 10s linear;
-        animation: progressFill 10s linear forwards;
+        transition: width 12s linear;
+        animation: progressFill 12s linear forwards;
       }
 
       .download-btn {
@@ -140,11 +140,11 @@
   </head>
   <body>
     <div class="loader" id="preloader" role="alert" aria-live="polite">
-        <p class="text" id="loadingText">
-          For the best experience, please view this website on a desktop browser.
-          If your internet connection is slow, some images may take longer to load.
-          Alternatively, you can also view the interactive PDF version.
-        </p>
+      <p class="text" id="loadingText">
+        For the best experience, please view this website on a desktop browser.
+        If your internet connection is slow, some images may take longer to load.
+        Alternatively, you can also view the interactive PDF version.
+      </p>
       <div class="progress-bar" id="progressBar"></div>
       <a
         download="Ansh_Ranjan_Portfolio.pdf"
@@ -182,7 +182,10 @@
           progressBar.style.display = "block";
           iframe.style.display = "block";
           document.getElementById("downloadBtn").style.display = "block";
-          setTimeout(hidePreloader, 10500);
+
+          iframe.onload = function () {
+            setTimeout(hidePreloader, 10500);
+          };
         }
       }
 
